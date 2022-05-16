@@ -1,0 +1,23 @@
+﻿@model Notes
+<form asp-controller= "Notes" asp-action="UpdateNote" method="post" >
+    <input type="hidden" asp-for=Id value="@Model.Id">
+    <input type="hidden" asp-for=ModificationDate value="@Model.ModificationDate" />
+<title>Edit Note</title>
+<div class="input-group mb-3">
+<span class="input-group-text" for="@Model.Title">Note name</span>
+<input type="text" class="form-control" asp-for=Title value="@Model.Title" required/>
+</div>
+<textarea id="editor" asp-for=Content ></textarea>
+<input type="submit" value="Save" class="btn btn-primary saveButton" />
+<a class="btn btn-dark saveButton" asp-action="Index">Cancel</a>
+</form>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+

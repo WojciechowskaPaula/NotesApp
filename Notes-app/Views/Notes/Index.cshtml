@@ -1,0 +1,27 @@
+﻿@model List<Notes>
+<div>
+<div class="card-group">
+    <div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-sm-3 card">
+           
+            <div class="card-body">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text">@Html.Raw(item.Content)</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">@item.ModificationDate</small>
+            </div>
+            <div class="card-footer">
+                <a asp-action="EditNote" asp-route-id="@item.Id" ><img class="editIcon" src="~/images/editIcon.svg"/></a>
+                <a asp-action="DeleteNote" asp-route-id="@item.Id" class="float-end"><img class="xPic" src="images/Red_X.svg"/></a>
+            </div>
+        </div>
+    }
+    </div>
+</div>
+<div class="addBtn">
+    <a class="btn btn-dark " asp-action="AddNoteForm">Add new</a>
+</div>
+</div>
