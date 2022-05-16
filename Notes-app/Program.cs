@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Notes_app.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
+builder.Host.UseSerilog((ctx, lc) => lc
+.WriteTo.Console()
+.WriteTo.File(".\\Logs\\Note.Log.txt",rollingInterval:RollingInterval.Day));
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
